@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 
 # Ec2 variables
->>>>>>> 639444ef31f11529039b7c9434bb1ed6264286a6
 variable "instance_names" {
     type = list(string)
     default = ["db","backend","frontend"]
@@ -32,10 +29,7 @@ variable "common_tags" {
   
 }
 
-<<<<<<< HEAD
-=======
 # security group variables
->>>>>>> 639444ef31f11529039b7c9434bb1ed6264286a6
 variable "sg_name" {
     default = "allow_ssh"
   
@@ -60,8 +54,6 @@ variable "allowed_cidr" {
   }
 
 
-<<<<<<< HEAD
-=======
 # route 53 variables
 
 variable "zone_id" {
@@ -71,7 +63,6 @@ variable "zone_id" {
 variable "domain_name" {
   default = "www.example.com"  
 }
->>>>>>> 639444ef31f11529039b7c9434bb1ed6264286a6
 
 
 
