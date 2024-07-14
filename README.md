@@ -154,3 +154,220 @@ Sample Terraform template for creating AWS security group.
 #  terraform destroy --> 
     Narendra@DESKTOP-EN72NH2 MINGW64 ~/terra_basics/create_ec2$ terraform destroy -auto-approve
 
+# Variables:
+	 in shell scripting -> USER --> declaring and assigning value to variable.
+	 in ansible : vars:
+						user: narendra
+	in terraform:
+		variable "<variable name>" {
+			type = string/number/bool/list/map
+			default = "<default-value>"
+		}
+		
+		
+    ##tagging strategy
+
+        nameof the resource
+        which project
+        which modules
+        which environment
+        who created
+        which date
+
+
+    ## terraform.tfvars
+        in varibledecleration we can give default values.
+        terraform.tfvars will over ride 
+
+    ##command line variables
+        terraform plan -var="instance_type=t3.medium"
+
+    ##env variables.
+        export TF_VAR_instance_type = t3.large
+
+    ## preference variables
+        #1. command line
+        #2. .tfvars
+        #3. env variable
+        #4. defaultvalues
+
+
+# Conditions:
+	if (expression):{
+		these will run if expression is true
+		
+	}
+	else{
+		these will run if the expression is false.
+	}
+
+	expression ? "this will run if expression is true": "run if false"
+
+expense:
+	if db, instance type should be t3.small
+	
+# lopps:
+	 count based loops
+	 for loops
+	 dynamic block loops
+	
+	count.index--> 0,1,2....
+		indexs start from 0
+
+
+
+# locals:
+	locals and variables are same , referring key value pair.
+
+	locals can hold expression and use it where ever you want. you can use variables inside locals. but you can't use other variables/locals inside variables.
+
+# data Sources:
+	
+	
+# state and remote state
+	terraform --> Iaac, declarative
+	what ever we write we will get.
+	shell is imperative
+	terraform is idempotent also.
+	
+	there is something called state.
+	
+	what ever we decleared terraform should create
+	
+	declared state[terraform files] == actual state[resources inside provider .i.e AWS]/ created infra
+	
+	I ran,terraform created infrastructure
+	I ran once again How terraform will understand what infra it is already created.
+	terraform.tfstate i the file that terraform tracks the actual infra.
+	
+	if i delete manually inside AWS but it exists in terraform.tfstate
+	
+	Refreshing state:
+		it will check terraform.tfsatte against AWS....
+	
+	terraform files = AWS infra --> no it is not equal
+	
+	terraform responsibility to create the infra equivalent to terraform files.
+	
+	terraform.tfstate,declare state, actual state, refresh state.
+	
+	remote state:
+		duplicate resources or errors, locking.
+		
+		1 person is creating infra through terraform, can we ask oter person also do same thing?
+		
+		there shoud be some locking mechanism, when one person is creating infra. it should be locked until it is completed.
+		
+		.lock file ---> means some one opened and others are not allowed to edit.
+
+# local state v/s remote state:
+	1. there is a chance you delete/edit the file...
+	2. it will not work in collobaration environment.
+	3. there is a chance multiple persons apply/edit the infra.
+	
+	we have s3 bucket in AWS.
+
+# s3 remote state"
+	s3 bucket can be looked with dynamodb table.
+	
+# how to create multiple environments with terraform
+
+    ## using tfvars
+        code is same ---> resources definition with terraform 
+
+    ## dev and prod:
+        
+        to override default values.
+
+    ## terraform init -backend-config=dev.backend.tf
+
+    ## module development(terraform-aws-ec2):
+        DRY --> don't repete yourself
+        minmum code
+        code reuse
+
+        re used variables
+        functions
+
+        1. custome module
+        2. opensource module
+    ## VPC(virtual private cloud):
+        in old days where there is VPC--> they have to buy the servers and deploy the code in servers.
+
+        development --> only dev servers
+        testing team --> only QA servers
+        production support --> limited access to production servers
+        call centers --> just iternal apps
+        devops --> full access to all servers.
+        linux admins --> all servers access
+
+        data center:
+            space
+            watch men
+            network
+            resources
+            maintainance
+        VPC is like a mini data center for a project. resources created inside VPC are isolated and private to ourself.
+
+        VPC Name = like village Name
+        VPC CIDR = Village pincode
+        subnets = streets
+        internet gate way = arch
+        routs = roads
+
+        public and private subnets:
+            * subnets which are connected to internet gateway are called public subnets.
+            * subnets which are not connectec to internet gate way are called private subnets.
+
+        192.168.1.3
+        Ip address --> 32 bits
+        4 octates --> each octate 8 bits
+        2^32 IP address possible
+        10.0.0.0/16 --> first 16 bits are fixed, you are not allowed to change
+        10.0 is fixed
+        each octate range --> 0-255
+
+        10.0.0.1
+        10.0.0.2
+        ...
+        ...
+        10.0.0.255
+        10.0.1.0
+        10.0.1.1
+        ...
+        ...
+        10.0.1.255
+
+        256*256 = 2^16= 64,000 possible Ip adderss.
+
+        step1.create VPC --> ipv4 cidr --> 10.0.0.0/16
+        step2.1.create Public subnet--> ipv4 cidr --> 10.0.1.0/24-->public
+        step2.2.create private subnet--> ipv4 cidr --> 10.0.11.0/24-->private
+        step2.3.create db subnet--> ipv4 cidr --> 10.0.21.0/24-->private
+
+
+        step3. create internet gateway( by default it creates internet gateway when we create VPC).
+        step4. attach to vpc-->VPC-->Internet gateways->select Internet gateway ID--> Actions--> Attach To Vpc--> select Available VPCs.
+        step5.create route table(Public and private)
+            click on route id(public) --> Routes-->Edit routes -->Add Route--> 0.0.0.0/0-->select Internet Gateway
+            routes not required for private
+            <!-- click on route id(private) --> Routes-->Edit routes -->Add Route--> 0.0.0.0/0-->select Internet Gateway -->
+        step6.1: Associate Public subnet to public Route table
+            click on public subnet--> Route table --> Edit route table association--> select Public
+            Route Table ID
+        step6.2: Associate Private subnet to Private Route table
+            click on private subnet--> Route table --> Edit route table association--> select Private
+            Route Table ID
+        step6.3: Associate db subnet to Private Route table
+            click on db subnet--> Route table --> Edit route table association--> select Private
+            Route Table ID
+
+
+
+
+
+
+# Terra form AWS EC2
+    ## INPUT
+    * ami_id
+
