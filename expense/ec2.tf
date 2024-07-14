@@ -1,6 +1,10 @@
 # resource <resource-type> <resource-name>
+<<<<<<< HEAD
 
 resource "aws_instance" "db" {
+=======
+resource "aws_instance" "expence" {
+>>>>>>> 639444ef31f11529039b7c9434bb1ed6264286a6
     count = length(var.instance_names)
     ami = var.image_id
     vpc_security_group_ids = [aws_security_group.allow_ssh.id]
