@@ -1,6 +1,6 @@
 # terraform_practice
 
-##terraform:
+# terraform:
 	
     ##infrastructure:
 
@@ -17,7 +17,7 @@
         4. we need to check each and every resourc and note down manually
         5. cost analysis
 
-##Infra as a code.
+# Infra as a code.
     1. version controller ---> we can maintain different versions of infra. multiple persons can colloborate to create infra.
     2. same infra accorss environments --> DEV, QA, PROD, etc..
     working in dev failed in prod. run the same code in all environments that create same infra.
@@ -30,7 +30,7 @@
     8. state management --> implictfeature.
 
 
-## Hybrid cloud --> 
+# Hybrid cloud --> 
 	Download Terraform. This article was tested using Terraform version 1.1.4.
 
 	From the download, extract the executable to a directory of your choosing (for example, c:\terraform).
@@ -45,7 +45,7 @@
 
 		https://awscli.amazonaws.com/AWSCLIV2.msi
 
-#Terraform --> HCL(Hashicorp Configuration language).
+# Terraform --> HCL(Hashicorp Configuration language).
     variables
     data types
     conditions
@@ -59,18 +59,18 @@
         dynamic blocks.
 	
 	
-xxx.tf --> terraform reads only . tf files.
-Configure IAM user to terraform
-    IAM user acceskey and secret key ---> aws->IAM->user(select user)->Security credentials->Create access key
+    xxx.tf --> terraform reads only . tf files.
+    Configure IAM user to terraform
+        IAM user acceskey and secret key ---> aws->IAM->user(select user)->Security credentials->Create access key
 
-    aws configure --> Aws cli isalready installed . so we can run aw configure in windows.
-        aws configure
-            AWS Access Key ID [None]: 
-            AWS Secret Access Key [None]: 
-            Default region name [None]: us-east-1
-            Default output format [None]:
+        aws configure --> Aws cli is already installed . so we can run aws configure in windows.
+            aws configure
+                AWS Access Key ID [None]: 
+                AWS Secret Access Key [None]: 
+                Default region name [None]: us-east-1
+                Default output format [None]:
 	
-#provider.tf
+# provider.tf
     ##provider configuration.
         terraform{
             required_providers {
@@ -137,7 +137,7 @@ Sample Terraform template for creating AWS security group.
         
         }
 
-#initialize terraform --> terraform initialize
+# initialize terraform --> terraform initialize
     ## command
         Narendra@DESKTOP-EN72NH2 MINGW64 ~/terra_basics/create_ec2$ terraform init
 
@@ -362,7 +362,43 @@ expense:
             click on db subnet--> Route table --> Edit route table association--> select Private
             Route Table ID
 
+            # NAT Gate Way:
+                * private servers can not connect to internet or can not accept connections from internet.
+                * traffic originating fromservers --> outbund
+                * traffic to the servers is called --> inbound.
 
+                NAT gate way --> public sub net
+                    this is to enable outbound internet traffic to the private servers..
+                    general use cases fetching the updates, downloading packages from internet.
+
+                    we need static Ip to create Nat gate way, normal ip keeps on changing.
+                    static Ip in AWS is Elastic IP.
+        step7: provide internet access to private Ip address
+            step7.1: create Elastic Ip 
+                VPC-->Elastic IPs-->Allocate Elastic IP address--> click on Allocate
+            step7.2: create Natgateway and assigne Elastic IP
+                VPC-->NAT gateways-->click on Create Nat Gateway --> write Name --> select Elastic IP allocation ID --> click on Create Nat Gateway.
+            step 7.3: Assigne Nat Gateway to private Private Route table
+                VPC-->click on route id(private) --> Routes-->Edit routes -->Add Route--> 0.0.0.0/0-->select Nat Gateway
+    ## VPC peering:
+        1. CIDR should not be overlaped
+        2. VPC can be in 
+            * either same regins of same account
+            * either diff region of same account.
+            * either same region of different accounts
+            * either diff region of diff accounts
+        3. routes should be added to subnets
+
+        Requester --> expense vpc
+        Acceptor --> default vpc
+
+        1. create peering connection
+        2. 
+    peering is optional --> make the peering optional default is false. if true then peering should be created.
+
+    auto acceptor works in the same aws account.
+    acceptor_vpc is empty then auto accept true, otherwise false.
+    
 
 
 
