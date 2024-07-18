@@ -31,6 +31,8 @@ https://stackoverflow.com/questions/60619873/how-to-get-the-default-vpc-id-with-
 
 https://stackoverflow.com/questions/68805603/how-to-find-default-route-table-id-of-a-specific-subnet
 
+https://developer.hashicorp.com/terraform/language/modules/sources
+
 
 
 Custom AWS VPC Module

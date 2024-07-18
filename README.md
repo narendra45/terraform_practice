@@ -398,6 +398,29 @@ expense:
 
     auto acceptor works in the same aws account.
     acceptor_vpc is empty then auto accept true, otherwise false.
+
+# Stateful and stateless
+    * MySql --> data is stored --> statefull application
+    * Backend --> No storage for backend. --> stateless application 
+    * Front End --> No stage for front end. --> stateless application
+
+    * very difficult to retreive data from stateful application.
+    * easy to restore backend application, because of no state.
+
+    # DB Admin teams:
+        * everyday backup, every 3hr/6hr
+        * test the backup/restore
+        * high availability(atleast 2 servers) and data replication(duplicate in to other server for safety)
+        * load balancing
+        * Major upgrade --> 5.3 --> 5.4
+        * Minor upgrade --> 5.3.1 --> 5.3.2
+
+    # database services in Cloud.
+        * RDS --> Upgrades, High availability, load balancing, snapshots/backup is cloud responsibility.
+        * Easy to configure.
+
+
+
     
 
 
