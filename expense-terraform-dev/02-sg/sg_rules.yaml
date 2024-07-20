@@ -1,16 +1,3 @@
-
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter
-
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter
-
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
-
-https://github.com/terraform-aws-modules/terraform-aws-ec2-instance
-
-https://github.com/terraform-aws-modules/terraform-aws-rds
-
-
-
 - name: SG Rules
   sg:
   - expense-dev-db
@@ -63,6 +50,5 @@ https://github.com/terraform-aws-modules/terraform-aws-rds
       desc: bastion accepting connection from private
       source: private
       port: 22
-
 
 

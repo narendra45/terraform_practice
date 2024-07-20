@@ -221,7 +221,14 @@ expense:
 
 	locals can hold expression and use it where ever you want. you can use variables inside locals. but you can't use other variables/locals inside variables.
 
-# data Sources:
+# data Sources *************:
+    going to console searching it and then using it.
+    Quarying and filtering AWS
+
+    requirements:
+        AMI Id and Owner:
+            EC2--> images -->AMIs--> select Public images --> search devops-practise-->get AMI Id and Owner.
+            ![alt text](image.png)
 	
 	
 # state and remote state
@@ -418,6 +425,12 @@ expense:
     # database services in Cloud.
         * RDS --> Upgrades, High availability, load balancing, snapshots/backup is cloud responsibility.
         * Easy to configure.
+
+# Bastion Host
+    we will create one Ec2 instance in pblic subnet-->Bastion Host
+    Alow back end servers and DB servers to connect from Bastion host
+
+    
 
 
 
